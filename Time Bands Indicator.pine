@@ -1,0 +1,18 @@
+//@version=4
+study(title = "Time Bands", overlay = true, shorttitle="etc" )
+
+desde=input(defval=timestamp("1999-02-20T00:00+03:00"), type= input.time, title="Desde")
+hasta=input(defval=timestamp("2040-02-20T00:00+03:00"), type= input.time, title="hasta")
+sesion = input(title="Rango Horario de Trading", type=input.session, defval="0930-1555", tooltip="para poder utilizar el control de rango horario de forma correcta, ir a configuracion(esquina superior derecha) -> Symbol -> Time Zone = 'Exchange'") 
+
+background_OFF = input(type = input.color, defval=color.red, title="fondo para sesion OFF")
+background_ON = input(type = input.color, defval=color.white, title="fondo para sesion ON")
+
+//Date Range Control:
+correct_date = ( time >= desde ) and ( time <= hasta )
+correct_hour = ( time(resolution="", session=sesion) != 0)
+//Si no se especifican los dias, se considera que la sesion se establecio de lunes a viernes (se excluyen sabados y domingos, considerados fin de semana), es decir, "1100-2000" es lo mismo que "1100-1200:23456"
+correct_time = correct_date and correct_hour
+
+//Background plot:
+bgcolor( (correct_time) ? background_ON : background_OFF)
