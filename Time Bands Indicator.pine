@@ -1,5 +1,5 @@
 //@version=4
-study(title = "Time Bands", overlay = true, shorttitle="etc" )
+study(title = "Time Bands", overlay = true, shorttitle="time bands" )
 
 desde=input(defval=timestamp("1999-02-20T00:00+03:00"), type= input.time, title="Desde")
 hasta=input(defval=timestamp("2040-02-20T00:00+03:00"), type= input.time, title="hasta")
